@@ -1,6 +1,6 @@
 # USE CASE :-
 User placing an order
-| Name       | Age | City       |
+| ID       | NAME | PRICE       |  STOCK |
 |:-----------|:---:|-----------:|
-| John Doe   |  30 | New York   |
-| Jane Smith |  25 | Los Angeles|
+| 1   |  laPTOP | New York   |   10 |
+| 2 |  25 | Los Angeles|   15  |
