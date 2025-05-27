@@ -1,6 +1,12 @@
 # USE CASE :-
-User placing an order
-| ID       | NAME | PRICE       |  STOCK |
-|:-----------|:---:|-----------:|
-| 1   |  laPTOP | New York   |   10 |
-| 2 |  25 | Los Angeles|   15  |
+<b>User placing an order</b>
+
+<h1>Inventory DB</h1>
+<h1>Order DB</h1>
+
+<hr>
+<h1>Steps to perform in Order Procession Service</h1>
+Step 1:- get product inventory<br>
+Step 2:- validate stock avaliability<br>
+Step 3:- update total price
+
