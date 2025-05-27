@@ -4,12 +4,12 @@ Transaction propagation defines how transactions relate to each other when multi
 
 <ol>
 <li><b>REQUIRED:- </b> This is the default propagation. If a transaction exists, the method will join it; otherwise, a new transaction will be created.</li>
-<li>**REQUIRES_NEW:** Suspends the current transaction (if one exists) and creates a new one.</li>
-<li>**SUPPORTS: ** Runs within a transaction if one exists; otherwise, it runs non-transactionally.</li>
-<li>**NOT_SUPPORTED:** Runs the method non-transactionally and suspends any existing transaction.</li>
-<li>**MANDATORY: ** Requires an existing transaction; throws an exception if none is present.</li>
-<li>**NEVER:** Runs without a transaction; throws an exception if a transaction exists.</li>
-<li>**NESTED: ** Runs within a nested transaction if one exists; otherwise, it starts a new transaction.</li>
+<li><b>REQUIRES_NEW:- </b> Suspends the current transaction (if one exists) and creates a new one.</li>
+<li><b>SUPPORTS:- </b> Runs within a transaction if one exists; otherwise, it runs non-transactionally.</li>
+<li><b>NOT_SUPPORTED:- </b> Runs the method non-transactionally and suspends any existing transaction.</li>
+<li><b>MANDATORY:-</b> Requires an existing transaction; throws an exception if none is present.</li>
+<li><b>NEVER:-</b> Runs without a transaction; throws an exception if a transaction exists.</li>
+<li><b>NESTED:-</b> Runs within a nested transaction if one exists; otherwise, it starts a new transaction.</li>
 </ol>
 
 # USE CASE :-
