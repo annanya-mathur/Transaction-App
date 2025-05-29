@@ -16,7 +16,7 @@ Transaction propagation defines how transactions relate to each other when multi
 <b>User placing an order</b>
 
 <h1>Inventory DB</h1>
-| product id | product name | product price | stock quantity |
+| product id | product name | product price | stock quantity |<br>
 |---|---|---|---|
 | 1 | Laptop | 25000 | 40 |
 | 2 | SmartPhone | 5000 | 5 |
