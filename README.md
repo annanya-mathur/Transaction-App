@@ -22,7 +22,7 @@ Transaction propagation defines how transactions relate to each other when multi
 <h1>Steps to perform in Order Procession Service</h1>
 Step 1:- get product inventory<br>
 Step 2:- validate stock avaliability<br>
-Step 3:- update total price in order entity
-Step 4:- save order
+Step 3:- update total price in order entity<br>
+Step 4:- save order<br>
 Step 5:- update stock in inventory
 
