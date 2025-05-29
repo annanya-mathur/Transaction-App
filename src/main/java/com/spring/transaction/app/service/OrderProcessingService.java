@@ -8,6 +8,8 @@ import com.spring.transaction.app.handler.OrderHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -25,24 +27,33 @@ public class OrderProcessingService {
     //Step 4:- save order
     //Step 5:- update stock in inventory
 
+
+    //REQUIRED:- join an existing transaction or create a new one if not exist
+    //REQUIRED_NEW:- always create new transaction by suspending the previous transaction if exists any.
+    @Transactional(propagation = Propagation.REQUIRED)
     public Order placeAnOrder(Order order)
     {
         Product productById = inventoryHandler.getProductById(order.getProductId());
         if(productById.getStock()<order.getQuantity())throw new ProductNotFoundException("Product with given quantity is not avaliable");
 
-        order.setTotalPrice(order.getQuantity()*productById.getPrice());
+        orderTotalPrice(order, productById);
         saveOrder(order);
         updateInventoryStock(order, productById);
 
-        return null;
+        return order;
+    }
+
+    private static void orderTotalPrice(Order order, Product productById) {
+        order.setTotalPrice(order.getQuantity()* productById.getPrice());
     }
 
     private void saveOrder(Order order) {
         Order savedOrder = orderHandler.saveOrder(order);
     }
 
-    private static void updateInventoryStock(Order order, Product productById) {
+    private void updateInventoryStock(Order order, Product productById) {
         productById.setStock(productById.getStock()- order.getQuantity());
+        inventoryHandler.updateProduct(productById);
     }
 
 }
