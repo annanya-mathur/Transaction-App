@@ -40,6 +40,8 @@ public class OrderProcessingService {
         saveOrder(order);
         updateInventoryStock(order, productById);
 
+        //REQUIRED_NEW
+        auditOrderDetails(order);
         return order;
     }
 
