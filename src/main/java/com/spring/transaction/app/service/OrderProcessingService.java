@@ -3,6 +3,7 @@ package com.spring.transaction.app.service;
 import com.spring.transaction.app.entity.Order;
 import com.spring.transaction.app.entity.Product;
 import com.spring.transaction.app.exception.ProductNotFoundException;
+import com.spring.transaction.app.handler.AuditLogHandler;
 import com.spring.transaction.app.handler.InventoryHandler;
 import com.spring.transaction.app.handler.OrderHandler;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,9 @@ public class OrderProcessingService {
     @Autowired
     private InventoryHandler inventoryHandler;
 
+    @Autowired
+    private AuditLogHandler auditLogHandler;
+
     //Step 1:- get product inventory
     //Step 2:- validate stock avaliability
     //Step 3:- update total price in order entity
@@ -37,11 +41,18 @@ public class OrderProcessingService {
         if(productById.getStock()<order.getQuantity())throw new ProductNotFoundException("Product with given quantity is not avaliable");
 
         orderTotalPrice(order, productById);
-        saveOrder(order);
-        updateInventoryStock(order, productById);
-
+        Order savedOrder=null;
+        try {
+            savedOrder = saveOrder(order);
+            updateInventoryStock(savedOrder, productById);
+            auditLogHandler.AuditLogDetails(order,"Order placement succeeded");
+        }
+        catch (Exception e)
+        {
+            auditLogHandler.AuditLogDetails(order,"Order placement failed");
+        }
         //REQUIRED_NEW
-        auditOrderDetails(order);
+
         return order;
     }
 
@@ -49,8 +60,9 @@ public class OrderProcessingService {
         order.setTotalPrice(order.getQuantity()* productById.getPrice());
     }
 
-    private void saveOrder(Order order) {
+    private Order saveOrder(Order order) {
         Order savedOrder = orderHandler.saveOrder(order);
+        return savedOrder;
     }
 
     private void updateInventoryStock(Order order, Product productById) {
