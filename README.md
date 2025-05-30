@@ -12,6 +12,8 @@ Transaction propagation defines how transactions relate to each other when multi
 <li><b>NESTED:-</b> Runs within a nested transaction if one exists; otherwise, it starts a new transaction.</li>
 </ol>
 
+# Isolation In Transaction
+
 # USE CASE :-
 <b>User placing an order</b>
 
@@ -28,6 +30,7 @@ Transaction propagation defines how transactions relate to each other when multi
 <hr>
 
 <h1>Order DB</h1>
+<h1>Audit Log DB</h1>
 
 <hr>
 <h1>Steps to perform in Order Procession Service</h1>
