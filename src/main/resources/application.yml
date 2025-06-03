@@ -21,9 +21,13 @@ spring:
 #Logger Configuration
 logging:
   level:
+    com:
+      spring:
+        transaction:
+          app: DEBUG
     org:
       hibernate:
-        transaction: DEBUG
+        transaction: TRACE
       springframework:
         transaction: DEBUG
         orm:
@@ -36,3 +40,5 @@ logging:
 #    maximum-pool-size: 20
 #    auto-commit: true
 #    isolation-level: TRANSACTION_READ_COMMITTED
+
+

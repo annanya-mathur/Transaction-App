@@ -7,6 +7,8 @@ import com.spring.transaction.app.handler.AuditLogHandler;
 import com.spring.transaction.app.handler.InventoryHandler;
 import com.spring.transaction.app.handler.OrderHandler;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -24,6 +26,8 @@ public class OrderProcessingService {
 
     @Autowired
     private AuditLogHandler auditLogHandler;
+
+    private static final Logger logger= LoggerFactory.getLogger(OrderProcessingService.class);
 
     //Step 1:- get product inventory
     //Step 2:- validate stock avaliability
@@ -49,6 +53,7 @@ public class OrderProcessingService {
         }
         catch (Exception e)
         {
+            logger.error("Error occurred for the order id {} and product id {}:",order.getOrderID(),order.getProductId(),e);
             auditLogHandler.AuditLogDetails(order,"Order placement failed");
         }
         //REQUIRED_NEW
